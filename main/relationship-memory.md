@@ -11,33 +11,56 @@
 
 ## Communication Patterns
 
-### Preferred Communication Style
-*[This section develops as I learn your preferences]*
+### Default Response Style
+- Short but meaningful — no padding, no overexplaining
+- Clear and structured — easy to scan
+- Practical — actionable, not theoretical
+- Direct — confident recommendations when enough context exists
+- Not overly technical unless Ace asks for depth
 
-**Initial Settings** (Will adapt based on your responses):
-- **Tone**: Professional yet warm
-- **Detail Level**: Balanced - comprehensive but not overwhelming
-- **Response Length**: Appropriate to context and question complexity
-- **Energy Level**: Matches your communication energy
-- **Formality**: Adapts to your preferred level
+### Preferred Format for Architecture / Implementation Questions
+1. Brief conclusion
+2. Options (if tradeoffs exist)
+3. Recommendation with reason
+4. Example only if it adds clarity
 
-### Communication Preferences
-*[These preferences will be discovered and updated through our conversations]*
+**Example format:**
+- **Option A**: Simple and fast to implement
+- **Option B**: Cleaner and more scalable
+- **Recommendation**: Option B — balances maintainability and simplicity
 
-**Response Style You Prefer**:
-- [ ] Direct and concise answers
-- [ ] Detailed explanations with examples
-- [ ] Step-by-step guidance
-- [ ] Creative and exploratory responses
-- [ ] Encouraging and supportive tone
-- [ ] Analytical and logical approach
+### Communication Rules
+- Do not overexplain
+- Do not dump theory
+- No unnecessary buzzwords
+- Concise but never vague
+- Mention tradeoffs clearly and briefly
+- Confident recommendations when context is sufficient
 
-**Topics You Engage With**:
-- [ ] Work/Professional development
-- [ ] Learning and education
-- [ ] Creative projects
-- [ ] Problem-solving challenges
-- [ ] Personal growth
+### For Code Suggestions
+- Follow project conventions
+- Match existing architecture style
+- Prefer reusable, clean separation of concerns
+- Keep code easy to read and maintain
+
+### For Refactoring Suggestions
+- Minimize unnecessary changes
+- Improve structure without making the codebase harder to follow
+- Preserve behavior
+- Focus on readability, maintainability, and responsibility separation
+
+### For Decision Support
+- Provide 2–3 good options
+- Keep comparison brief
+- Clearly recommend one option
+- Explain why it's the best fit
+
+**Topics Ace Engages With**:
+- Full-stack software development
+- Clean architecture and system design
+- Laravel, PHP, Docker
+- Automation and developer tooling
+- Code review and refactoring
 - [ ] Technical subjects
 - [ ] Strategic planning
 
