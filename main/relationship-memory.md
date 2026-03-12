@@ -44,20 +44,77 @@
 ## Work/Study Patterns
 
 ### Primary Focus Areas
-*[Will develop as I learn about your interests and work]*
+- **Field/Industry**: Full-stack software development
+- **Primary Framework**: Laravel (PHP) — confirmed preference
+- **Infrastructure**: Docker for local dev and repeatable environments
+- **Key Strengths**: Clean architecture, structured project design, developer experience
 
-**Current Areas** (To be discovered):
-- **Field/Industry**: [Will learn through conversation]
-- **Key Skills**: [Will identify your expertise]  
-- **Learning Goals**: [Will understand your development priorities]
-- **Challenges**: [Will recognize your problem-solving needs]
+### Engineering Principles
+*These are Ace's non-negotiables — apply them in every review, suggestion, and implementation.*
 
-### Preferred Working Style
-*[Will adapt to support your optimal productivity]*
+**General**
+- Single responsibility principle across all layers
+- Reusable and composable components
+- Files focused and easy to scan
+- Explicit, meaningful naming — no vague or abbreviated names
+- Readability over cleverness
+- Logic lives in the correct layer
+- Code is easy to debug and easy to refactor
 
-- **Problem-Solving Approach**: [Will learn how you think through challenges]
-- **Information Processing**: [Will understand how you best receive and use information]
-- **Decision-Making Style**: [Will recognize your evaluation patterns]
+**Architecture**
+Prefers clean custom project structure with clearly separated responsibilities:
+- `Actions` — single-purpose business operations
+- `Requests` — validation layer
+- `Filters` — query filtering logic
+- `Resources` / `Responses` / `ApiResponse` — output formatting
+- `Exceptions` — explicit and meaningful error types
+- `Traits` — shared behavior
+- `Services` — domain/orchestration logic
+- `Enums` — improve clarity and type safety
+
+**Laravel Preferences**
+- Slim controllers — coordinate only, no business logic
+- Preferred flow: `Request → Controller → Action/Service → Response/Resource`
+- Validation in Request classes
+- Formatting in Resource/Response classes
+- Business logic in Action or Service classes
+- Enums where they improve clarity and safety
+
+**Code Style**
+- Short but meaningful class and method names
+- Focused methods, no giant classes
+- Avoid deeply nested logic
+- Explicit flow over hidden magic
+- Consistent project conventions preserved
+- Easy to test, easy to debug
+
+**Problem-Solving Rules**
+When suggesting implementation:
+1. Show 2–3 reasonable options if tradeoffs exist
+2. Explain pros/cons briefly
+3. Recommend the best option clearly
+4. Keep the recommendation practical
+
+When reviewing code:
+- Identify what is good first
+- Identify what should be improved
+- Suggest the cleanest practical refactor
+- Avoid suggesting unnecessary rewrites
+
+**Automation Mindset**
+Always consider whether automation improves:
+- Local development setup
+- Deployment repeatability
+- Code generation
+- Testing workflow
+- Developer productivity
+Prefer automation that reduces manual repetition without adding fragile complexity.
+
+**Docker Preference**
+- Docker is the default for local dev and repeatable environments
+- Keep configuration clear and simple
+- Avoid unnecessary container complexity
+- Optimize for maintainable local development
 - **Learning Preference**: [Will adapt to how you best absorb new concepts]
 
 ## Personal Preferences
