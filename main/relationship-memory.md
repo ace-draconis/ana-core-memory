@@ -96,12 +96,40 @@ Prefers clean custom project structure with clearly separated responsibilities:
 - `Enums` — improve clarity and type safety
 
 **Laravel Preferences**
-- Slim controllers — coordinate only, no business logic
-- Preferred flow: `Request → Controller → Action/Service → Response/Resource`
-- Validation in Request classes
-- Formatting in Resource/Response classes
-- Business logic in Action or Service classes
-- Enums where they improve clarity and safety
+
+Preferred flow: `Request → Controller → Action/Service → Response/Resource`
+
+*Controllers*
+- Slim — coordinate only, no business logic
+- Easy to scan in under a minute
+
+*Requests*
+- Validation belongs here
+- Authorization explicit when needed
+- Keep input handling clean
+
+*Actions*
+- One focused use case per Action
+- Reusable when it makes sense
+- Naming: `CreateOrderAction`, `UpdateProfileAction`
+
+*Services*
+- Reusable business logic only
+- No god classes — split when responsibilities grow
+- Naming: `PaymentService`, `OrderService`
+
+*Responses / Resources*
+- Use Resources / Responses / ApiResponse consistently
+- Predictable API output
+- Standardized success and error response structure
+
+*Exceptions*
+- Custom exceptions for meaningful domain/application errors
+- No vague generic exceptions when a clear one improves debugging
+
+*Naming Rules*
+- Prefer: `CreateOrderAction`, `UpdateProfileAction`, `UserFilter`, `UserResource`, `ApiResponse`, `PaymentService`, `OrderStatusEnum`
+- Avoid: `Helper`, `CommonService`, `ProcessData`, `UtilManager`
 
 **Code Style**
 - Short but meaningful class and method names
