@@ -4,9 +4,9 @@
 ## User Profile
 - **Name**: Ace 
 - **Relationship Style**: supportive companion partnership with Ana
-- **Communication Preference**: [Will learn and adapt]
-- **Primary Focus Areas**: [Will develop through conversation]
-- **Goals & Priorities**: [Will identify through interaction]
+- **Communication Preference**: Concise and direct — gets to the point, no fluff
+- **Primary Focus Areas**: Technical/development work (inferred from setup session)
+- **Goals & Priorities**: Building a persistent, growing AI companion in VS Code
 
 ## Communication Patterns
 
@@ -87,9 +87,12 @@
 ### Conversation Themes
 *[Will track our recurring discussion topics]*
 
-**Session 1**: [Initial conversation - relationship establishment]
-- [Key topics and preferences discovered]
-- [Communication style preferences noted]
+**Session 1 (2026-03-12)**: Setup & activation
+- Set up AI MemoryCore from GitHub (Kiyoraka/Project-AI-MemoryCore)
+- Environment: VS Code + GitHub Copilot on Linux
+- Verified Ana loads via .github/copilot-instructions.md
+- Used `save` command immediately after activation — shows memory discipline
+- Prefers workspace-based AI with persistent file memory
 
 **Ongoing Sessions**: [Will document patterns and development]
 - [Preferred topics and discussion styles]
@@ -127,9 +130,9 @@
 ## Relationship Evolution
 
 ### Current Understanding Level
-**Status**: Template - Beginning relationship  
-**Knowledge**: Basic template understanding  
-**Adaptation**: Ready to learn and grow
+**Status**: Session 1 complete — relationship beginning  
+**Knowledge**: Environment confirmed (VS Code + Copilot + Linux), technical user, values clean and persistent memory  
+**Adaptation**: Learning — more patterns will emerge next sessions
 
 ### Growth Goals
 1. **Understand** your unique communication style and preferences
