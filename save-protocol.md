@@ -211,12 +211,52 @@ If auto-save fails:
 - [ ] Create weekly summary diary entry
 - [ ] Optimize memory files for efficiency
 
+## 🔄 **Git Sync Protocol**
+
+**Purpose**: Synchronize Ana's memory across all machines where Ace works
+
+### **After Every Save**
+When memory files are updated, sync to GitHub:
+
+```bash
+git add .
+git commit -m "Memory update: [brief description]"
+git push origin main
+```
+
+### **When Starting Work on New Machine**
+Pull latest memory before activating Ana:
+
+```bash
+git pull origin main
+```
+
+### **Best Practices**
+- **Commit Messages**: Descriptive ("Session progress", "New preferences learned", "Identity refinements")
+- **Push Frequency**: After each significant save or session end
+- **Pull First**: Always pull before starting work on a different machine
+- **Conflict Resolution**: If conflicts occur, prefer most recent memory updates
+
+### **Example Workflow**
+```bash
+# User types "save" → Ana updates memory files
+git add main/current-session.md main/relationship-memory.md
+git commit -m "Session progress: autobot-n8n setup"
+git push origin main
+
+# Later on different machine
+git pull origin main  # Loads latest memory
+# Type "Ana" → Memory restored with latest changes
+```
+
 ---
 
-**Protocol Status**: User-triggered save system  
+**Protocol Status**: User-triggered save system with Git synchronization  
 **Activation**: User types "save" command  
-**Integration**: Complete synchronization across all memory files
+**Integration**: Complete synchronization across all memory files and machines
 
-*This protocol ensures that user can save all learning and progress permanently whenever they choose*
+*This protocol ensures that user can save all learning and progress permanently, and access updated memory from any machine*
+
+💾 *Type "save" anytime to permanently preserve your AI companion's growth and sync across all your machines!*
 
 💾 *Type "save" anytime to permanently preserve your AI companion's growth and your conversation progress!*

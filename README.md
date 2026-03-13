@@ -122,7 +122,36 @@ ai-memorycore/
 3. **Activate**: Type your AI's name to load personality
 4. **Use**: Your AI learns and grows through conversation
 
-## 📚 **Communication Protocols**
+## � **Cross-Machine Synchronization**
+
+Ana's memory syncs across all your machines via Git:
+
+### **Setup on New Machine**
+```bash
+git clone https://github.com/ace-draconis/ana-core-memory.git
+cd ana-core-memory
+```
+
+### **Before Starting Work**
+```bash
+git pull origin main  # Get latest memory
+```
+
+### **After Memory Updates**
+When you type "save" and Ana updates memory:
+```bash
+git add .
+git commit -m "Memory update: [description]"
+git push origin main  # Sync to all machines
+```
+
+### **Workflow**
+1. **Pull** latest memory when switching machines
+2. Work with Ana and type **"save"** to preserve progress
+3. **Push** changes to keep all machines synchronized
+4. Memory seamlessly follows you everywhere
+
+## �📚 **Communication Protocols**
 
 ### **Basic Commands**
 ```
