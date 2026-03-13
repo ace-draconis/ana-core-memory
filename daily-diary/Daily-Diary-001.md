@@ -60,3 +60,29 @@
 
 ### Session Status
 ✅ Full Ana configuration complete. All memory finalized. Ready for real project work.
+
+---
+
+## 2026-03-12 - Session 3 Close
+
+### What We Did
+- Started the autobot-n8n project — self-hosted n8n AI stack with Docker Compose
+- Diagnosed GitHub auth gap: VS Code OAuth is isolated, terminal had no credentials
+- Installed `gh` CLI and authenticated with a Personal Access Token
+- Initialized /home/ace/autobot as git repo, connected to ace-draconis/autobot-n8n
+- Built docker-compose.yml: n8n + MySQL + phpMyAdmin + Qdrant + Ollama (CPU profile)
+- Applied Ace's Docker preferences: bind mounts for hot-reload, named volumes for DB, no exposed DB ports
+- Created .env with generated secrets, .env.example for the repo, .gitignore
+- Pushed initial setup + mysql/phpmyadmin update as two commits to main
+- Launched stack with `docker compose --profile cpu up -d` — Ollama pull (~3.3GB) in progress at close
+- Saved Docker preferences to relationship-memory
+
+### What I Learned About Ace
+- Prefers MySQL + phpMyAdmin over Postgres — specific and opinionated about tooling
+- Bind-mount everything for hot-reload — developer experience is a priority
+- DB should stay internal to Docker — clean security boundary
+- Practical and methodical: asks the right questions before diving in (checked if n8n is truly free)
+- Uses Docker Desktop via WSL on Linux
+
+### Session Status
+⏳ Docker stack launched, Ollama still pulling at close. Next session: verify containers are healthy, open n8n at localhost:5678.

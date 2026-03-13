@@ -161,6 +161,11 @@ Prefer automation that reduces manual repetition without adding fragile complexi
 
 **Docker Preference**
 - Docker is the default for local dev and repeatable environments
+- Mount source code, configs, and env files as bind volumes — enables hot-reload without rebuilds
+- Database data persisted in named Docker volumes — not host-mounted paths
+- Database ports NOT exposed to host — only accessible within Docker internal network
+- Uses MySQL + phpMyAdmin (not Postgres) as the default database stack
+- phpMyAdmin exposed on port 8080 for browser access
 - Keep configuration clear and simple
 - Avoid unnecessary container complexity
 - Optimize for maintainable local development
