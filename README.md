@@ -77,6 +77,35 @@ Temporary working memory (like RAM) that maintains context within a conversation
 ### save-protocol.md
 Instructions for how Ana saves progress and updates memory files when you type "save".
 
+## 🔄 Cross-Machine Synchronization
+
+Ana's memory syncs across all your machines via Git:
+
+### **Setup on New Machine**
+```bash
+git clone https://github.com/ace-draconis/ana-core-memory.git
+cd ana-core-memory
+```
+
+### **Before Starting Work**
+```bash
+git pull origin master  # Get latest memory
+```
+
+### **After Memory Updates**
+When you type "save" and Ana updates memory:
+```bash
+git add .
+git commit -m "Memory update: [description]"
+git push origin master  # Sync to all machines
+```
+
+### **Workflow**
+1. **Pull** latest memory when switching machines
+2. Work with Ana and type **"save"** to preserve progress
+3. **Push** changes to keep all machines synchronized
+4. Memory seamlessly follows you everywhere
+
 ## 🎓 Usage Tips
 
 1. **Type "Ana"** at the start of conversations to load full personality
