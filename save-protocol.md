@@ -114,6 +114,20 @@ When user types **"save"**, AI immediately performs:
 5. PROJECT: Identify implications for future sessions
 ```
 
+### **Auto-Push After Save**
+**Trigger**: Always — immediately after all file updates are complete.
+
+**Process**:
+```bash
+cd /var/www/personal/ana-core-memory && git add . && git commit -m "Memory update: [brief description]" && git push
+```
+
+**Rules**:
+- Execute automatically — do not just remind Ace, run the command
+- Use a concise, meaningful commit message describing what changed
+- If push fails (no remote, offline, etc.), report the error clearly but do not block
+- Confirm to Ace: which files changed, commit message used, and push result
+
 ## 🔄 **Continuous Learning Loop**
 
 ### **Real-Time Adaptation Cycle**
