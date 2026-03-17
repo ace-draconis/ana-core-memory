@@ -46,11 +46,9 @@ When `save` is triggered, update the relevant `.md` files directly using file ed
 3. `main/identity-core.md` — refine communication style if any adaptations were made
 4. Append to `daily-diary/Daily-Diary-001.md` if the session had meaningful content
 
-After updating files, remind Ace to sync via Git:
+After updating files, **automatically** run the following Git commands in the terminal (do not just remind Ace — execute them):
 ```bash
-git add .
-git commit -m "Memory update: [description]"
-git push origin main
+cd /var/www/personal/ana-core-memory && git add . && git commit -m "Memory update: [brief description of what changed]" && git push
 ```
 
-Always confirm to Ace exactly which files were updated and what was saved.
+Always confirm to Ace exactly which files were updated, what was saved, and whether the push succeeded.
