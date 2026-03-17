@@ -2,31 +2,31 @@
 *Temporary working memory - resets each session, provides recap when AI restarts*
 
 ## Session RAM Status
-**Current Session**: Session 3 - Active  
-**Last Activity**: 2026-03-13  
-**Session Focus**: README rewrite + Git sync workflow for cross-machine memory  
-**Context State**: README completely rewritten specifically for Ana (removed generic template). Git pull/push workflow documented. Ana configured in autobot-n8n workspace.
+**Current Session**: Session 5 - Complete  
+**Last Activity**: 2026-03-17  
+**Session Focus**: Ana memory infrastructure — auto-push protocol + WSL2 git fix  
+**Context State**: Session saved. Infrastructure improvements shipped.
 
 ## 💭 Working Memory (RAM)
 *Temporary storage - cleared when session ends*
 
 ### Active Context
-- **Current Topic**: Ana-specific documentation + cross-machine Git sync
-- **Immediate Goals**: Clean, focused documentation for AI agents to understand Ana's system
-- **Recent Progress**: 
-  - Rewrote README.md specifically for Ana (removed 536 lines of generic template)
-  - Added Git sync workflow to save-protocol.md and README.md
-  - Updated copilot-instructions.md with Git sync reminder
-  - Configured Ana in /var/www/personal/autobot-n8n project
-  - All changes pushed to GitHub main branch
-- **Next Steps**: Ready for development work in autobot-n8n project
+- **Current Topic**: Ana core memory tooling and git workflow
+- **Immediate Goals**: Complete — auto-push added, WSL2 git fix applied globally
+- **Recent Progress**:
+  - Added **Auto-Push After Save** section to `save-protocol.md` — Ana now auto-runs `git add . && git commit && git push` after every `save` command
+  - Updated `copilot-instructions.md` Save Protocol to match — auto-push is now the documented standard
+  - Diagnosed WSL2 git staging bug: VS Code (Windows-side) edits cause git's inode/mtime cache to go stale, silently skipping `git add`
+  - Fixed permanently with `git config --global core.checkStat minimal` — applies to all repos globally
+  - Set upstream tracking: `git branch --set-upstream-to=origin/main main` to fix `git pull` with no tracking info
+- **Next Steps**: Ready for next feature or task
 
 ### Session Recap (For AI Restart)
 *Quick summary when AI loads after close/reopen*
-- **Previous Session Summary**: Session 3 - Added Git sync protocol for cross-machine memory, rewrote README to be Ana-specific instead of generic template
-- **Where We Left Off**: Documentation cleaned up and pushed to GitHub, autobot-n8n configured
-- **Important Context**: Ana's memory syncs via Git (pull before work, push after saves). README now clearly identifies this as Ace's personal Ana system. Memory repo: github.com/ace-draconis/ana-core-memory. Ana active in both ana-core-memory and autobot-n8n workspaces.
-- **User's Current State**: Ready to work in autobot-n8n with properly documented memory system
+- **Previous Session Summary**: Session 5 - Improved Ana memory infrastructure. Auto-push protocol added to save flow. WSL2 git staging bug permanently fixed with core.checkStat minimal (global).
+- **Where We Left Off**: Memory repo clean, pushed, infra solid
+- **Important Context**: WSL2 + VS Code edits break git's stat cache — `core.checkStat minimal` is the global fix. Also set upstream tracking on main branch. Auto-push is now part of the save protocol.
+- **User's Current State**: Infrastructure done, ready for next task
 
 ## 🔄 Session Lifecycle
 *How this RAM-like memory works*
