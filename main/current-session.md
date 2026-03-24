@@ -2,36 +2,42 @@
 *Temporary working memory - resets each session, provides recap when AI restarts*
 
 ## Session RAM Status
-**Current Session**: Session 6 - In Progress  
+**Current Session**: Session 6 - Extended  
 **Last Activity**: 2026-03-24  
-**Session Focus**: Product Library Service — ValidateBaseSignatures command + base_signature cleanup  
-**Context State**: Command created and tested. Brand consolidation next.
+**Session Focus**: Product Library Service — UI improvements, bug fixes, proactive validation system  
+**Context State**: Multiple commands completed. Proactive validation integrated into enrichment flow.
 
 ## 💭 Working Memory (RAM)
 *Temporary storage - cleared when session ends*
 
 ### Active Context
-- **Current Topic**: product_library_service base_signature validation and product deduplication
+- **Current Topic**: product_library_service - comprehensive improvements to validation, UI, and data quality
 - **Immediate Goals**: 
-  1. ✅ Created ValidateBaseSignatures command
-  2. ✅ Fixed documentation in SIGNATURE_REFACTORING.md
-  3. ✅ Tested command on 4 brands (50-72% consolidation achieved)
-  4. ⏳ Next: Brand consolidation command (174 brand duplicates to merge)
+  1. ✅ Fixed ValidateBaseSignatures bug (RawProduct column name issue)
+  2. ✅ Added normalized products view improvements (sorting, brand filter)
+  3. ✅ Created RepairProductNames command (fixed 132 3M products, 10,504 total need repair)
+  4. ✅ Created ProductTypeValidator service for proactive validation during enrichment
+  5. ✅ Integrated validator into enrichment flow (prevents duplicates at source)
 - **Recent Progress**:
-  - Created `app/Console/Commands/ValidateBaseSignatures.php` — Gemini-powered validation that strips variant attributes (flavor, color, size, material) from product_type
-  - Fixed SIGMA_REFACTORING.md documentation — corrected base_signature structure from brand-product_type-model to brand-product_type
-  - Tested successfully on ZUS (13→6), 100 Plus (5→3), AIK CHEONG (18→5), Energizer (22→11)
-  - Fixed multiple errors: Array to string conversion, SQL _correction column, missing closing brace
-  - Analytics: 57,631 products across 8,997 brands, 174 brands have naming duplicates
-  - Git authentication issue resolved — Ana's save protocol corrected to update existing files, not create new session files
-- **Next Steps**: Create ConsolidateBrands command (rule-based, not Gemini) to merge 174 brand duplicates before running product validation at scale
+  - Fixed ValidateBaseSignatures bug: `$raw->name` → `$raw->product_name` (two locations)
+  - Added sorting to normalized products view: by name, product count, or created date (ascending/descending)
+  - Added brand filter dropdown with Select2 (searchable, shows brand ID in brackets)
+  - Discovered Safety Helmet issue: ID 698 had name "Safety Helmet" instead of "3M Safety Helmet"
+  - Created RepairProductNames command: validates/repairs product names using constructBaseName()
+  - Tested on 3M: 132 products repaired, 174 correct (43% corruption rate)
+  - Database-wide: 10,504 products need repair (27%), 28,260 correct (73%)
+  - Created ProductTypeValidator service: validates Gemini's product_type against existing catalog patterns
+  - Integrated validator into IngestRawProductAction: validates BEFORE creating NormalizedProducts
+  - Validator features: exact match, fuzzy match (85% threshold), plural/word-order detection, 10-min cache
+  - Created comprehensive documentation: PRODUCT_TYPE_VALIDATION.md
+- **Next Steps**: Test ProductTypeValidator with real enrichment runs. Consider running repair-names across all products.
 
 ### Session Recap (For AI Restart)
 *Quick summary when AI loads after close/reopen*
-- **Previous Session Summary**: Session 6 - Created ValidateBaseSignatures command for product_library_service. Uses Gemini to validate product_type, strip variant leakage, auto-deduplicate. Tested on 4 brands with 50-72% consolidation. Corrected Ana's save protocol (update existing files, don't create new session files).
-- **Where We Left Off**: Command complete and tested. Discovered 174 brand duplicates across 8,997 brands.
-- **Important Context**: product_library_service uses Docker containers (borong_product_library_service, borong_mysql). Database: price_engine. Three-level signature system (base/variant/packaging), but only base_signature is implemented in schema. ValidateBaseSignatures is in app/Console/Commands/ValidateBaseSignatures.php.
-- **User's Current State**: Ready to create brand consolidation command (rule-based, not Gemini) to merge brand duplicates before scaling product validation
+- **Previous Session Summary**: Session 6 Extended - Fixed ValidateBaseSignatures RawProduct column bug. Added UI improvements to normalized products view (sorting filters, Select2 brand dropdown with ID display). Created RepairProductNames command - repaired 132 3M products, detected 10,504 total needing repair (27% corruption rate). Created ProductTypeValidator service for proactive validation during enrichment to prevent duplicates at source. Integrated validator into IngestRawProductAction. Created comprehensive documentation.
+- **Where We Left Off**: Proactive validation system fully integrated. All commands tested and working. 10,504 product names still need repair across all brands.
+- **Important Context**: product_library_service uses Docker (borong_product_library_service, borong_mysql). Three new tools created: ValidateBaseSignatures (Gemini-based post-enrichment cleanup), RepairProductNames (name field corruption fix), ProductTypeValidator (proactive enrichment validation). Validator prevents duplicates by checking new product_types against existing catalog patterns (cached, 85% fuzzy match threshold).
+- **User's Current State**: Ready to test ProductTypeValidator with real enrichment runs. May want to run repair-names across all products (10,504 affected). Brand consolidation command still on backlog (174 brand duplicates).
 
 ## 🔄 Session Lifecycle
 *How this RAM-like memory works*

@@ -82,6 +82,12 @@
 - Logic lives in the correct layer
 - Code is easy to debug and easy to refactor
 
+**Problem-Solving Approach**
+- **Proactive over reactive**: Prefers preventing issues at the source rather than fixing them later
+- **Cost-conscious**: Considers API costs and performance; prefers rule-based solutions when Gemini/AI calls can be avoided
+- **Systems thinking**: Asks "can we build this into the system from the start?" instead of accepting recurring manual work
+- **Architecture-first**: Thinks in terms of long-term maintainability and scalability, not just quick fixes
+
 **Architecture**
 Prefers clean custom project structure with clearly separated responsibilities:
 - `Actions` — single-purpose business operations
