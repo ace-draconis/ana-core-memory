@@ -2,42 +2,44 @@
 *Temporary working memory - resets each session, provides recap when AI restarts*
 
 ## Session RAM Status
-**Current Session**: Session 6 - Extended  
-**Last Activity**: 2026-03-24  
-**Session Focus**: Product Library Service — UI improvements, bug fixes, proactive validation system  
-**Context State**: Multiple commands completed. Proactive validation integrated into enrichment flow.
+**Current Session**: Session 7 - Brand Consolidation & Edit Features  
+**Last Activity**: 2026-03-25  
+**Session Focus**: Product Library Service — Brand consolidation system, normalized product editing, signature regeneration  
+**Context State**: Brand consolidation fully functional. Edit feature with auto-signature regeneration completed. SSH configured for Ana's memory repo.
 
 ## 💭 Working Memory (RAM)
 *Temporary storage - cleared when session ends*
 
 ### Active Context
-- **Current Topic**: product_library_service - comprehensive improvements to validation, UI, and data quality
+- **Current Topic**: product_library_service - brand consolidation system + normalized product editing
 - **Immediate Goals**: 
-  1. ✅ Fixed ValidateBaseSignatures bug (RawProduct column name issue)
-  2. ✅ Added normalized products view improvements (sorting, brand filter)
-  3. ✅ Created RepairProductNames command (fixed 132 3M products, 10,504 total need repair)
-  4. ✅ Created ProductTypeValidator service for proactive validation during enrichment
-  5. ✅ Integrated validator into enrichment flow (prevents duplicates at source)
+  1. ✅ Built brand consolidation system: ListSubBrands + ConsolidateSubBrands commands
+  2. ✅ Fixed detection bugs: formatting duplicates + parent-child relationships + multi-level grouping (Pass 2.5)
+  3. ✅ Enhanced Gemini prompt to return ALL sub-brand IDs (not just one)
+  4. ✅ Added edit feature for normalized products with auto-signature regeneration
+  5. ✅ Added brand filter link in hierarchy view (click brand name to filter)
 - **Recent Progress**:
-  - Fixed ValidateBaseSignatures bug: `$raw->name` → `$raw->product_name` (two locations)
-  - Added sorting to normalized products view: by name, product count, or created date (ascending/descending)
-  - Added brand filter dropdown with Select2 (searchable, shows brand ID in brackets)
-  - Discovered Safety Helmet issue: ID 698 had name "Safety Helmet" instead of "3M Safety Helmet"
-  - Created RepairProductNames command: validates/repairs product names using constructBaseName()
-  - Tested on 3M: 132 products repaired, 174 correct (43% corruption rate)
-  - Database-wide: 10,504 products need repair (27%), 28,260 correct (73%)
-  - Created ProductTypeValidator service: validates Gemini's product_type against existing catalog patterns
-  - Integrated validator into IngestRawProductAction: validates BEFORE creating NormalizedProducts
-  - Validator features: exact match, fuzzy match (85% threshold), plural/word-order detection, 10-min cache
-  - Created comprehensive documentation: PRODUCT_TYPE_VALIDATION.md
-- **Next Steps**: Test ProductTypeValidator with real enrichment runs. Consider running repair-names across all products.
+  - Built ListSubBrands command: 3-pass detection (formatting duplicates, parent-child, orphans), exports CSV
+  - Built ConsolidateSubBrands command: Gemini-powered decisions, batch processing, stores product lines in attributes JSON
+  - Added helpers: normalizeBrandName(), hasProperCapitalization() for formatting duplicate detection
+  - Tested: F&N (4→1), Nestle (2→1), Milo→Nestle (manual), 3M (12→1), Faber-Castell (kept separate from Faber ✓)
+  - Fixed column error: model_or_part_number → attributes JSON
+  - Deleted redundant ConsolidateBrands.php, unified functionality into ConsolidateSubBrands
+  - Fixed "3M E-A-R" issue: Added Pass 2.5 to connect formatting duplicate groups to parent brands
+  - Changed --verbose to --show-gemini (Laravel reserved keyword conflict)
+  - Fixed MAGGIO mistake: Initially merged with MAGGI (food brand), restored as separate industrial pump brand
+  - Added edit routes: GET /normalized-products/{id}/edit, PUT /normalized-products/{id}
+  - Edit feature auto-regenerates base_signature, base_checksum, slug when brand/product_type/model changes
+  - Added edit button (✏️) in hierarchy view
+  - Added success message display on index page
+- **Next Steps**: Run brand consolidation on remaining 547 groups. Consider spelling error detection (MAGGI vs MAGGIE).
 
 ### Session Recap (For AI Restart)
 *Quick summary when AI loads after close/reopen*
-- **Previous Session Summary**: Session 6 Extended - Fixed ValidateBaseSignatures RawProduct column bug. Added UI improvements to normalized products view (sorting filters, Select2 brand dropdown with ID display). Created RepairProductNames command - repaired 132 3M products, detected 10,504 total needing repair (27% corruption rate). Created ProductTypeValidator service for proactive validation during enrichment to prevent duplicates at source. Integrated validator into IngestRawProductAction. Created comprehensive documentation.
-- **Where We Left Off**: Proactive validation system fully integrated. All commands tested and working. 10,504 product names still need repair across all brands.
-- **Important Context**: product_library_service uses Docker (borong_product_library_service, borong_mysql). Three new tools created: ValidateBaseSignatures (Gemini-based post-enrichment cleanup), RepairProductNames (name field corruption fix), ProductTypeValidator (proactive enrichment validation). Validator prevents duplicates by checking new product_types against existing catalog patterns (cached, 85% fuzzy match threshold).
-- **User's Current State**: Ready to test ProductTypeValidator with real enrichment runs. May want to run repair-names across all products (10,504 affected). Brand consolidation command still on backlog (174 brand duplicates).
+- **Previous Session Summary**: Session 7 - Built comprehensive brand consolidation system with ListSubBrands + ConsolidateSubBrands commands. Detection uses 3-pass logic: formatting duplicates (3M E-A-R vs 3M EAR), parent-child (3M + 3M Scotch), multi-level grouping (Pass 2.5). Gemini-powered consolidation tested on multiple brands, stores product lines in attributes JSON. Fixed detection bugs causing "3M E-A-R" sub-brands to be missed. Added edit feature for normalized products with auto-signature regeneration when brand/product_type/model changes. Fixed MAGGIO mistake (separate industrial pump brand, not MAGGI food brand). Added brand filter link in hierarchy view.
+- **Where We Left Off**: Brand consolidation fully functional with 549 groups detected. Edit feature committed. 547 brand groups remaining to process. Spelling errors (MAGGI vs MAGGIE) need manual review.
+- **Important Context**: Brand consolidation detects formatting duplicates AND parent-child relationships. Pass 2.5 connects formatting groups to parent brands (fixes "3M E-A-R" issue). Gemini prompt enhanced to return ALL sub-brand IDs. Edit feature auto-regenerates signatures when key fields change. System cannot detect spelling errors (MAGGI vs MAGGIE) - those need manual review.
+- **User's Current State**: Ace has functional brand consolidation system. Can now manually correct brand assignments via edit feature. Ready to process remaining brand groups incrementally.
 
 ## 🔄 Session Lifecycle
 *How this RAM-like memory works*
