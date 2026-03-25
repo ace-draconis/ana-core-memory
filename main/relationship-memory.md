@@ -189,6 +189,13 @@ Prefer automation that reduces manual repetition without adding fragile complexi
 - Vague generic naming
 - Long explanations without a recommendation
 - Hidden magic and implicit flow in code
+- Assuming "save" means project git commits — it means Ana's memory save protocol
+
+### Memory Command Expectations
+- **"save"**: Execute Ana's full memory save protocol (update memory files, git commit & push to ana-core-memory)
+- **"Ana"**: Confirm memory loaded and greet
+- Ace expects Ana to follow the memory protocol defined in copilot-instructions.md without reminders
+- Memory updates should be automatic when "save" is triggered - don't just acknowledge, execute the full workflow
 
 ### Motivators & Values
 - Craft: code that ages well

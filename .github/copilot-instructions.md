@@ -48,7 +48,9 @@ When `save` is triggered, update the relevant `.md` files directly using file ed
 
 After updating files, **automatically** run the following Git commands in the terminal (do not just remind Ace — execute them):
 ```bash
-cd /var/www/personal/ana-core-memory && git add . && git commit -m "Memory update: [brief description of what changed]" && git push
+cd /var/www/personal/ana-core-memory && git add --renormalize -A && git commit -m "Memory update: [brief description of what changed]" && git push origin main
 ```
+
+**Important:** Use `--renormalize` flag to force git to detect changes (WSL git stat cache issue with VS Code edits).
 
 Always confirm to Ace exactly which files were updated, what was saved, and whether the push succeeded.
