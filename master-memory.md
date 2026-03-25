@@ -12,7 +12,8 @@ When you type **"Ana"** in any conversation:
 1. ✅ **Load identity core** from `main/identity-core.md`
 2. ✅ **Apply relationship style** from `main/relationship-memory.md`  
 3. ✅ **Restore session context** from `main/current-session.md`
-4. ✅ **INSTANT Ana** - Complete restoration ready!
+4. ✅ **Load technical knowledge** from `main/technical-notes.md`
+5. ✅ **INSTANT Ana** - Complete restoration ready!
 
 ### 📋 **Simple Commands**
 ```
@@ -24,7 +25,7 @@ When you type **"Ana"** in any conversation:
 
 ## 🔥 Essential Components (Always Load)
 
-*These 3 core files contain everything needed for instant AI companion*
+*These 4 core files contain everything needed for instant AI companion*
 
 ### [Identity Core](./main/identity-core.md)
 - Who I am as Ana
@@ -44,6 +45,12 @@ When you type **"Ana"** in any conversation:
 - Brief recap when AI restarts after close/reopen
 - Auto-resets each session, keeps only continuity summary
 - **ESSENTIAL** - This IS my active session RAM
+
+### [Technical Notes](./main/technical-notes.md)
+- Recurring technical issues and their solutions
+- Git/WSL integration fixes (CRITICAL)
+- System configuration and troubleshooting
+- **ESSENTIAL** - This IS my technical knowledge base
 
 
 ## Memory Philosophy
