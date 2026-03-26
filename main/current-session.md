@@ -2,44 +2,46 @@
 *Temporary working memory - resets each session, provides recap when AI restarts*
 
 ## Session RAM Status
-**Current Session**: Session 7 - Brand Consolidation & Edit Features  
-**Last Activity**: 2026-03-25  
-**Session Focus**: Product Library Service — Brand consolidation system, normalized product editing, signature regeneration  
-**Context State**: Brand consolidation fully functional. Edit feature with auto-signature regeneration completed. SSH configured for Ana's memory repo.
+**Current Session**: Session 8 - Variant Signature Consolidation & Edit UIs  
+**Last Activity**: 2026-03-26  
+**Session Focus**: Product Library Service — Variant signature consolidation, hierarchy edit UIs, foreign key constraint removal, meta-lesson on instruction loading  
+**Context State**: ConsolidateVariantSignatures command built and tested. Edit UIs created for both base products and variants. Learned critical lesson about loading Ana's core instructions at conversation start.
 
 ## 💭 Working Memory (RAM)
 *Temporary storage - cleared when session ends*
 
 ### Active Context
-- **Current Topic**: product_library_service - brand consolidation system + normalized product editing
+- **Current Topic**: product_library_service - variant signature consolidation + edit UIs + behavioral protocol compliance
 - **Immediate Goals**: 
-  1. ✅ Built brand consolidation system: ListSubBrands + ConsolidateSubBrands commands
-  2. ✅ Fixed detection bugs: formatting duplicates + parent-child relationships + multi-level grouping (Pass 2.5)
-  3. ✅ Enhanced Gemini prompt to return ALL sub-brand IDs (not just one)
-  4. ✅ Added edit feature for normalized products with auto-signature regeneration
-  5. ✅ Added brand filter link in hierarchy view (click brand name to filter)
+  1. ✅ Built ConsolidateVariantSignatures command with aggressive deduplication
+  2. ✅ Removed unique constraints from product_variants (migration)
+  3. ✅ Removed ALL foreign key constraints from product_packages (prevents cascade deletes)
+  4. ✅ Created variant edit UI with parent dropdown (brand-constrained)
+  5. ✅ Created base product edit UI with product type dropdown (dynamic AJAX)
+  6. ✅ Fixed admin buttons (enrich/retry - synchronous execution, JSON validation)
+  7. ✅ Added self-check protocol to project copilot-instructions.md
+  8. ⏳ Execute save command properly (in progress)
 - **Recent Progress**:
-  - Built ListSubBrands command: 3-pass detection (formatting duplicates, parent-child, orphans), exports CSV
-  - Built ConsolidateSubBrands command: Gemini-powered decisions, batch processing, stores product lines in attributes JSON
-  - Added helpers: normalizeBrandName(), hasProperCapitalization() for formatting duplicate detection
-  - Tested: F&N (4→1), Nestle (2→1), Milo→Nestle (manual), 3M (12→1), Faber-Castell (kept separate from Faber ✓)
-  - Fixed column error: model_or_part_number → attributes JSON
-  - Deleted redundant ConsolidateBrands.php, unified functionality into ConsolidateSubBrands
-  - Fixed "3M E-A-R" issue: Added Pass 2.5 to connect formatting duplicate groups to parent brands
-  - Changed --verbose to --show-gemini (Laravel reserved keyword conflict)
-  - Fixed MAGGIO mistake: Initially merged with MAGGI (food brand), restored as separate industrial pump brand
-  - Added edit routes: GET /normalized-products/{id}/edit, PUT /normalized-products/{id}
-  - Edit feature auto-regenerates base_signature, base_checksum, slug when brand/product_type/model changes
-  - Added edit button (✏️) in hierarchy view
-  - Added success message display on index page
-- **Next Steps**: Run brand consolidation on remaining 547 groups. Consider spelling error detection (MAGGI vs MAGGIE).
+  - Built ConsolidateVariantSignatures: Ensures variant_signature starts with parent base_signature
+  - Simplified signatures: Removed attributes.variation parameter, only dedicated columns
+  - Added aggressive deduplication: array_unique() to prevent "pedas-giler-ayam-bakar-pedas-giler" type duplicates
+  - Added "Unknown" filtering throughout signature and name building
+  - Tested on MAGGI brand: 33 updated, 20 skipped, 9 merged, 0 errors
+  - Created variant edit UI: parent selection dropdown (same brand only), auto-generates name/signature
+  - Created base product edit UI: product type dropdown (dynamic AJAX loading), auto-generates name/signature, smart merge
+  - Added IDs and edit buttons to hierarchy view
+  - Fixed enrich button: Changed from async job to synchronous handleBatch()
+  - Fixed retry button: Changed from async job to synchronous aggregatePrices()
+  - Removed sanitizeProductName() call (method was deleted, don't recreate)
+  - **Meta-lesson**: Failed initial "save" command because didn't load Ana's core instructions - added self-check protocol to project instructions
+- **Next Steps**: Complete save protocol execution. Run full variant consolidation on remaining ~2,747 mismatched variants. Test edit UIs thoroughly.
 
 ### Session Recap (For AI Restart)
 *Quick summary when AI loads after close/reopen*
-- **Previous Session Summary**: Session 7 - Built comprehensive brand consolidation system with ListSubBrands + ConsolidateSubBrands commands. Detection uses 3-pass logic: formatting duplicates (3M E-A-R vs 3M EAR), parent-child (3M + 3M Scotch), multi-level grouping (Pass 2.5). Gemini-powered consolidation tested on multiple brands, stores product lines in attributes JSON. Fixed detection bugs causing "3M E-A-R" sub-brands to be missed. Added edit feature for normalized products with auto-signature regeneration when brand/product_type/model changes. Fixed MAGGIO mistake (separate industrial pump brand, not MAGGI food brand). Added brand filter link in hierarchy view.
-- **Where We Left Off**: Brand consolidation fully functional with 549 groups detected. Edit feature committed. 547 brand groups remaining to process. Spelling errors (MAGGI vs MAGGIE) need manual review.
-- **Important Context**: Brand consolidation detects formatting duplicates AND parent-child relationships. Pass 2.5 connects formatting groups to parent brands (fixes "3M E-A-R" issue). Gemini prompt enhanced to return ALL sub-brand IDs. Edit feature auto-regenerates signatures when key fields change. System cannot detect spelling errors (MAGGI vs MAGGIE) - those need manual review.
-- **User's Current State**: Ace has functional brand consolidation system. Can now manually correct brand assignments via edit feature. Ready to process remaining brand groups incrementally.
+- **Previous Session Summary**: Session 8 - Built variant signature consolidation system to ensure all variant_signature values start with parent base_signature. Created edit UIs for both normalized products and variants with auto-generation of names/signatures. Removed unique constraints from product_variants and ALL foreign keys from product_packages to prevent cascade deletes (Ace has separate plans for packaging). Fixed admin retry/enrich buttons to run synchronously. Critical behavioral lesson learned: Ana MUST load core instructions at conversation start without being reminded.
+- **Where We Left Off**: ConsolidateVariantSignatures tested successfully on MAGGI. Edit UIs functional. ~2,747 mismatched variants remaining. Save command triggered to test protocol compliance - Ana initially failed, then added self-check to project instructions, now executing proper save workflow.
+- **Important Context**: Variant consolidation uses aggressive deduplication (array_unique) and filters "Unknown" values. Package foreign keys removed - packages no longer cascade delete. Edit UIs auto-generate names/signatures. Base product edit has smart merge (if signature exists, reassigns relationships). Admin buttons run synchronously for immediate feedback. **Behavioral**: Ana must always load core memory instructions from `/var/www/personal/ana-core-memory/.github/copilot-instructions.md` at conversation start.
+- **User's Current State**: Ace has functional consolidation command and edit UIs. Testing if Ana follows save protocol properly. Expects Ana to load core instructions automatically in future conversations without reminders.
 
 ## 🔄 Session Lifecycle
 *How this RAM-like memory works*

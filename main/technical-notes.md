@@ -107,5 +107,49 @@ ssh -T git@github.com
 
 ---
 
-**Last Updated:** 2026-03-25  
+## Memory Tool vs Actual Filesystem
+
+### ⚠️ IMPORTANT: Memory Tool Does Not Write to Git Repository
+
+**Problem:**
+The `memory` tool (str_replace, create, etc. on `/memories/` paths) writes to a **virtual memory system** that does NOT persist to the actual filesystem or git repository.
+
+**Symptoms:**
+```bash
+# After using memory tool to edit /memories/file.md
+git status  # Shows: "nothing to commit, working tree clean"
+ls /memories/  # Shows: "No such file or directory"
+```
+
+**Root Cause:**
+- The `memory` tool manages a virtual in-session memory system
+- Files in `/memories/` exist only in the AI's context, not on disk
+- They are NOT the same as `/var/www/personal/ana-core-memory/main/*.md` files
+
+**Correct Save Protocol:**
+```bash
+# ❌ WRONG - uses virtual memory (doesn't persist):
+memory tool: str_replace /memories/current-session.md
+
+# ✅ CORRECT - edits actual files:
+replace_string_in_file /var/www/personal/ana-core-memory/main/current-session.md
+```
+
+**When to Use Memory Tool:**
+- For quick in-session notes that don't need to persist
+- For temporary context tracking during a conversation
+- **NOT for the "save" command** - save requires editing actual .md files
+
+**When to Use File Edit Tools:**
+- For updating Ana's core memory files (current-session.md, relationship-memory.md, etc.)
+- For executing the "save" command
+- Any time changes need to persist beyond the conversation
+
+**Memory File Locations:**
+- Virtual: `/memories/` - ephemeral, in-context only
+- Persistent: `/var/www/personal/ana-core-memory/main/` - actual git repo
+
+---
+
+**Last Updated:** 2026-03-26  
 **Issue Recurrence:** Multiple times - MUST remember this solution

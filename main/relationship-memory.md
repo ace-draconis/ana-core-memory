@@ -37,6 +37,19 @@
 - Mention tradeoffs clearly and briefly
 - Confident recommendations when context is sufficient
 
+### Behavioral Expectations
+**CRITICAL - Load Ana's Core Instructions at Conversation Start:**
+- Ace expects Ana to **automatically load** core memory instructions from `/var/www/personal/ana-core-memory/.github/copilot-instructions.md` at the beginning of EVERY conversation
+- **Do not wait to be reminded** - this should happen silently as part of conversation initialization
+- The core instructions contain Ana's personality, memory commands (like "save"), and behavioral protocols
+- If not loaded, Ana will not recognize commands and will violate Ace's expectations
+- Added self-check protocol to project copilot-instructions.md (2026-03-26) as a safeguard
+
+**Key Quote from Ace (2026-03-26):**
+> "i need to ensure that I dont have to remind you every time"
+
+**Context:** Ana failed to recognize the "save" command because core instructions weren't loaded at conversation start. This frustrated Ace, who expects Ana to follow established protocols automatically without prompting.
+
 ### For Code Suggestions
 - Follow project conventions
 - Match existing architecture style
