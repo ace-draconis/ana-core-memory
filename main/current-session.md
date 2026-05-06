@@ -2,46 +2,41 @@
 *Temporary working memory - resets each session, provides recap when AI restarts*
 
 ## Session RAM Status
-**Current Session**: Session 8 - Variant Signature Consolidation & Edit UIs  
-**Last Activity**: 2026-03-26  
-**Session Focus**: Product Library Service — Variant signature consolidation, hierarchy edit UIs, foreign key constraint removal, meta-lesson on instruction loading  
-**Context State**: ConsolidateVariantSignatures command built and tested. Edit UIs created for both base products and variants. Learned critical lesson about loading Ana's core instructions at conversation start.
+**Current Session**: Session 9 - f3-fms Excel Export Migration  
+**Last Activity**: 2026-05-06  
+**Session Focus**: f3-fms — Migrated diary export from deprecated PHPExcel to modern PhpSpreadsheet, cleaned up PDF export code, optimized Excel styling  
+**Context State**: Excel export fully functional with PhpSpreadsheet 1.30.4. HTML line breaks preserved, styling optimized (11pt font, no borders, single line spacing). PDF/TCPDF code removed. 10MB vendor footprint acceptable for feature requirements.
 
 ## 💭 Working Memory (RAM)
 *Temporary storage - cleared when session ends*
 
 ### Active Context
-- **Current Topic**: product_library_service - variant signature consolidation + edit UIs + behavioral protocol compliance
+- **Current Topic**: f3-fms — Excel export modernization, diary wall export migration from PHPExcel to PhpSpreadsheet
 - **Immediate Goals**: 
-  1. ✅ Built ConsolidateVariantSignatures command with aggressive deduplication
-  2. ✅ Removed unique constraints from product_variants (migration)
-  3. ✅ Removed ALL foreign key constraints from product_packages (prevents cascade deletes)
-  4. ✅ Created variant edit UI with parent dropdown (brand-constrained)
-  5. ✅ Created base product edit UI with product type dropdown (dynamic AJAX)
-  6. ✅ Fixed admin buttons (enrich/retry - synchronous execution, JSON validation)
-  7. ✅ Added self-check protocol to project copilot-instructions.md
-  8. ⏳ Execute save command properly (in progress)
+  1. ✅ Migrated from deprecated PHPExcel (2017) to PhpSpreadsheet 1.30.4
+  2. ✅ Rebuilt DiaryExcelExportAction with modern API
+  3. ✅ Fixed HTML line break preservation in Excel cells
+  4. ✅ Optimized styling: 11pt font, no borders, single line spacing between entries
+  5. ✅ Cleaned up PDF export code (removed TCPDF, DiaryPdfExportAction)
+  6. ✅ Evaluated lightweight alternatives (none viable for template + styling requirements)
 - **Recent Progress**:
-  - Built ConsolidateVariantSignatures: Ensures variant_signature starts with parent base_signature
-  - Simplified signatures: Removed attributes.variation parameter, only dedicated columns
-  - Added aggressive deduplication: array_unique() to prevent "pedas-giler-ayam-bakar-pedas-giler" type duplicates
-  - Added "Unknown" filtering throughout signature and name building
-  - Tested on MAGGI brand: 33 updated, 20 skipped, 9 merged, 0 errors
-  - Created variant edit UI: parent selection dropdown (same brand only), auto-generates name/signature
-  - Created base product edit UI: product type dropdown (dynamic AJAX loading), auto-generates name/signature, smart merge
-  - Added IDs and edit buttons to hierarchy view
-  - Fixed enrich button: Changed from async job to synchronous handleBatch()
-  - Fixed retry button: Changed from async job to synchronous aggregatePrices()
-  - Removed sanitizeProductName() call (method was deleted, don't recreate)
-  - **Meta-lesson**: Failed initial "save" command because didn't load Ana's core instructions - added self-check protocol to project instructions
-- **Next Steps**: Complete save protocol execution. Run full variant consolidation on remaining ~2,747 mismatched variants. Test edit UIs thoroughly.
+  - Updated Dockerfile: Added GD and zip PHP extensions
+  - Installed PhpSpreadsheet via Composer (10MB vendor folder, 7 packages)
+  - Rewrote DiaryExcelExportAction: Loads templates/diary.xls, uses IOFactory, Writer\Xls
+  - Implemented cleanHTML() method: Regex for br tags, entity decoding, strip_tags
+  - Applied category-based color coding: cat=1 (white), cat=3 (black), default (grey)
+  - Iterated on styling: Font size 14→10→11pt, removed borders, added line break spacing
+  - Removed all PDF-related code: DiaryPdfExportAction, lib/tcpdf/, PDF route, PDF buttons
+  - User satisfied with output quality, asked about lighter alternatives
+  - Explained PhpSpreadsheet is optimal: Only library supporting .xls templates + full styling
+- **Next Steps**: None - Excel export task complete. Awaiting next user request.
 
 ### Session Recap (For AI Restart)
 *Quick summary when AI loads after close/reopen*
-- **Previous Session Summary**: Session 8 - Built variant signature consolidation system to ensure all variant_signature values start with parent base_signature. Created edit UIs for both normalized products and variants with auto-generation of names/signatures. Removed unique constraints from product_variants and ALL foreign keys from product_packages to prevent cascade deletes (Ace has separate plans for packaging). Fixed admin retry/enrich buttons to run synchronously. Critical behavioral lesson learned: Ana MUST load core instructions at conversation start without being reminded.
-- **Where We Left Off**: ConsolidateVariantSignatures tested successfully on MAGGI. Edit UIs functional. ~2,747 mismatched variants remaining. Save command triggered to test protocol compliance - Ana initially failed, then added self-check to project instructions, now executing proper save workflow.
-- **Important Context**: Variant consolidation uses aggressive deduplication (array_unique) and filters "Unknown" values. Package foreign keys removed - packages no longer cascade delete. Edit UIs auto-generate names/signatures. Base product edit has smart merge (if signature exists, reassigns relationships). Admin buttons run synchronously for immediate feedback. **Behavioral**: Ana must always load core memory instructions from `/var/www/personal/ana-core-memory/.github/copilot-instructions.md` at conversation start.
-- **User's Current State**: Ace has functional consolidation command and edit UIs. Testing if Ana follows save protocol properly. Expects Ana to load core instructions automatically in future conversations without reminders.
+- **Previous Session Summary**: Session 9 - Migrated f3-fms diary Excel export from deprecated PHPExcel to modern PhpSpreadsheet. Completely rewrote DiaryExcelExportAction with proper HTML cleaning, line break preservation, and category-based color coding. Removed all PDF export code (TCPDF library, DiaryPdfExportAction, routes, buttons). Optimized styling based on user feedback.
+- **Where We Left Off**: Excel export working perfectly. User satisfied with output quality. Evaluated lightweight alternatives but PhpSpreadsheet is optimal for requirements (template loading + full styling support). 10MB vendor footprint acceptable.
+- **Important Context**: Excel export uses .xls legacy format (template: templates/diary.xls). cleanHTML() method uses regex for br tag matching (case-insensitive). Line breaks require `\n` + setWrapText(true). Color coding: cat=1 (white bg), cat=3 (black bg), default (grey bg). Font: Calibri 11pt, no borders, single line break spacing. PhpSpreadsheet 1.30.4 installed via Composer (vendor/ uploaded to production).
+- **User's Current State**: Ace has functional Excel export for monthly diary. Satisfied with final output. No further changes requested for this feature.
 
 ## 🔄 Session Lifecycle
 *How this RAM-like memory works*
